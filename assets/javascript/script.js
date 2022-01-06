@@ -34,7 +34,7 @@ for (var i=9; i<=17; i++) {
 
 function drawTimeBlock(id) {
     timeBlocksEl.children().first().append($(
-        '<div class="input-group" id="'+ id +'"><div class="input-group-prepend"><span class="input-group-text">X:XX</span></div><textarea class="form-control" aria-label="With textarea" data-which='+ id +'></textarea><div class="input-group-append"><button data-which='+ id +' class="input-group-text saveBtn">🔓</button></div></div>'
+        '<div class="input-group" id="'+ id +'"><div class="input-group-prepend"><span class="input-group-text hour">X:XX</span></div><textarea class="form-control" aria-label="With textarea" data-which='+ id +'></textarea><div class="input-group-append"><button data-which='+ id +' class="input-group-text saveBtn">🔓</button></div></div>'
         ));
 }
 

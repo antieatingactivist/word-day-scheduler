@@ -2,44 +2,60 @@ var dateEl = $('#currentDay');
 var timeBlocksEl = $('#time-blocks');
 var currentHour = 14;
 // var currentHour = moment().format('H');
-// dateEl.text(moment().format('dddd, MMMM Do YYYY - h:mm:ss a'));
 
+dateEl.text(moment().format('dddd, MMMM Do YYYY - h:mm:ss a'));
 window.setInterval(function() {
     dateEl.text(moment().format('dddd, MMMM Do YYYY - h:mm:ss a'));
+    // colorize();
+    if (currentHour != moment().format('H')) {
+        // currentHour = moment().format('H');
+        colorize();
+       
+    }
 },1000);
 
 
-timeBlocksEl.append($('<div class="container"></div>'));
+
 
 for (var i=9; i<=17; i++) {
-    jQueryString = '#'+i;
+    var jQueryString = '#'+i;
     var hour = i;
-
-
     var storedText = localStorage.getItem(i);
     if (hour>12) hour-=12;
     drawTimeBlock(i);
     $(jQueryString).children().first().children().text(hour+':00');
-    
-    if (currentHour > i) {
-        $(jQueryString).children().eq(1).addClass("past");
-        
-        // $(jQueryString).css({"left": (i*-3) +"px"});
-        // if (i > 9) $(jQueryString).addClass("stacked");
-    }
-    else if (currentHour == i) {
-        $(jQueryString).children().eq(1).addClass("present");
-        // $(jQueryString).addClass("stacked");
-    }
-    else {
-        $(jQueryString).children().eq(1).addClass("future");
-        // $(jQueryString).addClass("unstacked");
-    }
     $(jQueryString).children().eq(1).val(storedText);
 
 }
 
+function colorize() {
+    $('textarea').removeClass("future");
+    $('textarea').removeClass("past");
+    $('textarea').removeClass("present");
+   
+    for (var i=9; i<=17; i++) {
+        var jQueryString = '#'+i;
+        var hour = i;
+        
+        
+        if (currentHour > i) {
+            $(jQueryString).children().eq(1).addClass("past");
+            
+            // $(jQueryString).css({"left": (i*-3) +"px"});
+            // if (i > 9) $(jQueryString).addClass("stacked");
+        }
+        else if (currentHour == i) {
+            $(jQueryString).children().eq(1).addClass("present");
+            // $(jQueryString).addClass("stacked");
+        }
+        else {
+            $(jQueryString).children().eq(1).addClass("future");
+            // $(jQueryString).addClass("unstacked");
+        }
 
+    }
+}
+colorize();
 
 function drawTimeBlock(id) {
     timeBlocksEl.children().first().append($(

@@ -40,7 +40,7 @@ for (var i=9; i<=17; i++) {
 
 function drawTimeBlock(id) {
     timeBlocksEl.children().first().append($(
-        '<div class="input-group"><div class="input-group-prepend hour"><span class="input-group-text">X:XX</span></div><textarea class="form-control" aria-label="With textarea"></textarea><div class="input-group-append"><button class="input-group-text saveBtn">🔓</button></div></div>'
+        '<div class="input-group"><div class="input-group-prepend hour"><span class="input-group-text">X:XX</span></div><textarea class="form-control" aria-label="With textarea"></textarea><div class="input-group-append"><button class="input-group-text saveBtn bi bi-save-fill"></button></div></div>'
         ));
     timeBlocksEl.children().first().children().last().attr('id',id);
     timeBlocksEl.children().first().children().last().children().eq(1).attr('data-which',id);
@@ -53,8 +53,10 @@ $('button').on('click', function(e) {
     var text = $('#' + id).children().eq(1).val();
     console.log(text);
     localStorage.setItem(id,text);
-    $('#' + id).children().eq(2).children().removeClass('unsaved');
-
+    // $('#' + id).children().eq(2).children().removeClass('unsaved');
+    $('#' + id).children().eq(2).children().removeClass('bi-save');
+    $('#' + id).children().eq(2).children().addClass('bi-save-fill');
+    
 
     
 });
@@ -62,7 +64,9 @@ $('button').on('click', function(e) {
 $('textarea').on('keypress', function(e) {
 
     var id = e.target.getAttribute("data-which");
-    $('#' + id).children().eq(2).children().addClass('unsaved');
+    // $('#' + id).children().eq(2).children().addClass('unsaved');
+    $('#' + id).children().eq(2).children().removeClass('bi-save-fill');
+    $('#' + id).children().eq(2).children().addClass('bi-save');
    
 });
 

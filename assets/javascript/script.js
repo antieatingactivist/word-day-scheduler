@@ -2,10 +2,13 @@ var dateEl = $('#currentDay');
 var timeBlocksEl = $('#time-blocks');
 var currentHour = 14;
 // var currentHour = moment().format('H');
+// dateEl.text(moment().format('dddd, MMMM Do YYYY - h:mm:ss a'));
+
+window.setInterval(function() {
+    dateEl.text(moment().format('dddd, MMMM Do YYYY - h:mm:ss a'));
+},1000);
 
 
-
-dateEl.text(moment().format('dddd, MMMM Do YYYY - h:mm:ss a'));
 timeBlocksEl.append($('<div class="container"></div>'));
 
 for (var i=9; i<=17; i++) {

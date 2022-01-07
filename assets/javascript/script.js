@@ -9,27 +9,30 @@ dateEl.text(moment().format('dddd, MMMM Do YYYY - h:mm:ss a'));
 timeBlocksEl.append($('<div class="container"></div>'));
 
 for (var i=9; i<=17; i++) {
-    
+    jQueryString = '#'+i;
     var hour = i;
 
 
     var storedText = localStorage.getItem(i);
     if (hour>12) hour-=12;
     drawTimeBlock(i);
-    $('#'+i).children().first().children().text(hour+':00');
+    $(jQueryString).children().first().children().text(hour+':00');
+    
     if (currentHour > i) {
-        $('#'+i).children().eq(1).addClass("past");
-        if (i > 9) $('#'+i).addClass("stacked");
+        $(jQueryString).children().eq(1).addClass("past");
+        
+        // $(jQueryString).css({"left": (i*-3) +"px"});
+        // if (i > 9) $(jQueryString).addClass("stacked");
     }
     else if (currentHour == i) {
-        $('#'+i).children().eq(1).addClass("present");
-        $('#'+i).addClass("stacked");
+        $(jQueryString).children().eq(1).addClass("present");
+        // $(jQueryString).addClass("stacked");
     }
     else {
-        $('#'+i).children().eq(1).addClass("future");
-        $('#'+i).addClass("unstacked");
+        $(jQueryString).children().eq(1).addClass("future");
+        // $(jQueryString).addClass("unstacked");
     }
-    $('#'+i).children().eq(1).val(storedText);
+    $(jQueryString).children().eq(1).val(storedText);
 
 }
 
@@ -37,8 +40,11 @@ for (var i=9; i<=17; i++) {
 
 function drawTimeBlock(id) {
     timeBlocksEl.children().first().append($(
-        '<div style="margin-left:'+ (id-9)*5 +'px"  class="input-group" id="'+ id +'"><div class="input-group-prepend hour"><span class="input-group-text">X:XX</span></div><textarea class="form-control" aria-label="With textarea" data-which='+ id +'></textarea><div class="input-group-append"><button data-which='+ id +' class="input-group-text saveBtn">🔓</button></div></div>'
+        '<div class="input-group"><div class="input-group-prepend hour"><span class="input-group-text">X:XX</span></div><textarea class="form-control" aria-label="With textarea"></textarea><div class="input-group-append"><button class="input-group-text saveBtn">🔓</button></div></div>'
         ));
+    timeBlocksEl.children().first().children().last().attr('id',id);
+    timeBlocksEl.children().first().children().last().children().eq(1).attr('data-which',id);
+    timeBlocksEl.children().first().children().last().children().eq(2).children().attr('data-which',id);
 }
 
 $('button').on('click', function(e) {
@@ -47,6 +53,16 @@ $('button').on('click', function(e) {
     var text = $('#' + id).children().eq(1).val();
     console.log(text);
     localStorage.setItem(id,text);
+    $('#' + id).children().eq(2).children().removeClass('unsaved');
+
 
     
 });
+
+$('textarea').on('keypress', function(e) {
+
+    var id = e.target.getAttribute("data-which");
+    $('#' + id).children().eq(2).children().addClass('unsaved');
+   
+});
+

@@ -1,6 +1,6 @@
 var dateEl = $('#currentDay');
 var timeBlocksEl = $('#time-blocks');
-var currentHour = 15;
+var currentHour = 14;
 // var currentHour = moment().format('H');
 
 
@@ -19,12 +19,15 @@ for (var i=9; i<=17; i++) {
     $('#'+i).children().first().children().text(hour+':00');
     if (currentHour > i) {
         $('#'+i).children().eq(1).addClass("past");
+        if (i > 9) $('#'+i).addClass("stacked");
     }
-    else if (currentHour === i) {
+    else if (currentHour == i) {
         $('#'+i).children().eq(1).addClass("present");
+        $('#'+i).addClass("stacked");
     }
     else {
         $('#'+i).children().eq(1).addClass("future");
+        $('#'+i).addClass("unstacked");
     }
     $('#'+i).children().eq(1).val(storedText);
 
@@ -34,7 +37,7 @@ for (var i=9; i<=17; i++) {
 
 function drawTimeBlock(id) {
     timeBlocksEl.children().first().append($(
-        '<div class="input-group" id="'+ id +'"><div class="input-group-prepend"><span class="input-group-text hour">X:XX</span></div><textarea class="form-control" aria-label="With textarea" data-which='+ id +'></textarea><div class="input-group-append"><button data-which='+ id +' class="input-group-text saveBtn">🔓</button></div></div>'
+        '<div style="margin-left:'+ (id-9)*5 +'px"  class="input-group" id="'+ id +'"><div class="input-group-prepend hour"><span class="input-group-text">X:XX</span></div><textarea class="form-control" aria-label="With textarea" data-which='+ id +'></textarea><div class="input-group-append"><button data-which='+ id +' class="input-group-text saveBtn">🔓</button></div></div>'
         ));
 }
 

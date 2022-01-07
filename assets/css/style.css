@@ -42,6 +42,7 @@ textarea{
   text-align: center;
   border-radius: 15px;
   box-shadow: 4px 4px 4px #000000;
+
 }
 
 .row {
@@ -50,17 +51,25 @@ textarea{
   border-top: 1px solid white;
 }
 
-.hour {
+.hour span{
   background-color: #ffffffdd;
   color: #000000;
   border-top: 1px solid #000000;
   width: 100px;
   font-size: 30px;
+  /* border-radius: 0; */
+}
+
+.hour {
+  /* border-style: solid; */
+  /* border-radius: 0; */
+  /* border-radius: inherit; */
 }
 
 .past, .past:focus {
   background-color: #d3d3d377;
   color: white;
+  
 }
 
 .present, .present:focus {
@@ -72,6 +81,15 @@ textarea{
   background-color: #77dd77dd;
   color: white;
 }
+
+.stacked {
+  margin-top: -45px;
+}
+.unstacked {
+  margin-top: 5px;
+}
+
+
 
 .saveBtn {
   border-left: 1px solid black;
@@ -94,10 +112,15 @@ textarea{
 }
 
 .input-group {
+  /* position: relative; */
+  /* top: 80px; */
   -webkit-backdrop-filter: blur(4px);
   backdrop-filter: blur(4px);
-  margin: 5px;
-  box-shadow: 4px 4px 4px #000000;
+  /* margin: 5px; */
+  box-shadow: 2px 2px 5px #000000;
+  /* margin-top: -5px; */
+  /* margin-left: -10px; */
+  /* border-radius: 10px; */
   
 }
 

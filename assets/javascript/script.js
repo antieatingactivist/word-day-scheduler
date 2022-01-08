@@ -1,14 +1,13 @@
 var dateEl = $('#currentDay');
 var timeBlocksEl = $('#time-blocks');
-var currentHour = 14;
-// var currentHour = moment().format('H');
+// var currentHour = 14;
+var currentHour = moment().format('H');
 
 dateEl.text(moment().format('dddd, MMMM Do YYYY - h:mm:ss a'));
 window.setInterval(function() {
     dateEl.text(moment().format('dddd, MMMM Do YYYY - h:mm:ss a'));
-    // colorize();
     if (currentHour != moment().format('H')) {
-        // currentHour = moment().format('H');
+        currentHour = moment().format('H');
         colorize();
        
     }
@@ -40,17 +39,12 @@ function colorize() {
         
         if (currentHour > i) {
             $(jQueryString).children().eq(1).addClass("past");
-            
-            // $(jQueryString).css({"left": (i*-3) +"px"});
-            // if (i > 9) $(jQueryString).addClass("stacked");
         }
         else if (currentHour == i) {
             $(jQueryString).children().eq(1).addClass("present");
-            // $(jQueryString).addClass("stacked");
         }
         else {
             $(jQueryString).children().eq(1).addClass("future");
-            // $(jQueryString).addClass("unstacked");
         }
 
     }
@@ -72,7 +66,6 @@ $('button').on('click', function(e) {
     var text = $('#' + id).children().eq(1).val();
     console.log(text);
     localStorage.setItem(id,text);
-    // $('#' + id).children().eq(2).children().removeClass('unsaved');
     $('#' + id).children().eq(2).children().removeClass('bi-save');
     $('#' + id).children().eq(2).children().addClass('bi-save-fill');
     
@@ -83,7 +76,6 @@ $('button').on('click', function(e) {
 $('textarea').on('keypress', function(e) {
 
     var id = e.target.getAttribute("data-which");
-    // $('#' + id).children().eq(2).children().addClass('unsaved');
     $('#' + id).children().eq(2).children().removeClass('bi-save-fill');
     $('#' + id).children().eq(2).children().addClass('bi-save');
    

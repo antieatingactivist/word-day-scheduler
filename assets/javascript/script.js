@@ -33,10 +33,7 @@ function colorize() {
     $('textarea').removeClass("present");
    
     for (var i=9; i<=17; i++) {
-        var jQueryString = '#'+i;
-        var hour = i;
-        
-        
+        var jQueryString = '#'+i;   
         if (currentHour > i) {
             $(jQueryString).children().eq(1).addClass("past");
         }
@@ -64,7 +61,6 @@ $('button').on('click', function(e) {
     e.preventDefault();
     var id = e.target.getAttribute("data-which");
     var text = $('#' + id).children().eq(1).val();
-    console.log(text);
     localStorage.setItem(id,text);
     $('#' + id).children().eq(2).children().removeClass('bi-save');
     $('#' + id).children().eq(2).children().addClass('bi-save-fill');
@@ -73,9 +69,8 @@ $('button').on('click', function(e) {
     
 });
 
-$('textarea').on('keypress', function(e) {
-
-    var id = e.target.getAttribute("data-which");
+$('textarea').on('keydown', function(e) {
+    var id = this.getAttribute("data-which");
     $('#' + id).children().eq(2).children().removeClass('bi-save-fill');
     $('#' + id).children().eq(2).children().addClass('bi-save');
    
